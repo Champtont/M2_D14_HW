@@ -15,6 +15,8 @@ async function getInfo() {
   return data;
 }
 
+const removeThis = (event) => {};
+
 function renderProducts(data) {
   const cardSector = document.getElementById("productrow");
 
@@ -32,6 +34,8 @@ function renderProducts(data) {
         <li>${data.price}</li>
         <li>${data._id}</li>
         </ul>
+        <a href="backOffice.html"><button class="btn btn-primary">Edit</button><a>
+        <button id="delete" class="btn btn-danger">Delete</button>
       </div>
       <div class="col-4">
       <img src="${data.imageUrl}" class="img-fluid" style="width:100%; height:100%; object-fit:cover;" />
@@ -40,6 +44,9 @@ function renderProducts(data) {
         </div>`;
 
     cardSector.appendChild(cards);
+    const deletebtn = document.getElementById("delete");
+
+    deletebtn.addEventListener("click", removeThis);
   });
 }
 getInfo();
