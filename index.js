@@ -11,30 +11,35 @@ async function getInfo() {
     }
   );
   const data = await response.json();
-  console.log(data);
+  renderProducts(data);
   return data;
 }
 
 function renderProducts(data) {
   const cardSector = document.getElementById("productrow");
 
-  data.forEach(({ name, price, brand, imageURL, _id }, index) => {
+  data.forEach((data) => {
     const cards = document.createElement("div");
 
-    cards.classList.add("col-sm-12 col-md-6 col-lg-4 courtscards");
+    cards.classList.add("col-sm-12", "col-md-6", "col-lg-4", "courtscards");
     cards.innerHTML = `
-        <div id="card" class="row">
-        <div id="cardtext" class="col-8">
-        <h4>${index + 1} ${name}</h4>
+    <div id="cardtext" class="card mb-2">
+     <div id="card" class="row flex-nowrap">
+      <div class="card-body col-8">
+        <h4>${data.name}</h4>
         <ul>
-        <li>${brand}</li>
-        <li>${price}</li>
-        <li>${_id}</li>
+        <li>${data.brand}</li>
+        <li>${data.price}</li>
+        <li>${data._id}</li>
         </ul>
-        </div>
-        <img src="${imageURL}" class="img-fluid col-4" />
+      </div>
+      <div class="col-4">
+      <img src="${data.imageUrl}" class="img-fluid" style="width:100%; height:100%; object-fit:cover;" />
+      </div>  
+      </div>
         </div>`;
 
     cardSector.appendChild(cards);
   });
 }
+getInfo();
